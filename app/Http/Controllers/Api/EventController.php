@@ -18,7 +18,7 @@ class EventController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created reso,,,urce in storage.
      */
     public function store(Request $request)
     {
