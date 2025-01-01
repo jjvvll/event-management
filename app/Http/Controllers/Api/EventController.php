@@ -17,6 +17,11 @@ class EventController extends Controller
         return EventResource::collection( resource: Event::with('user')->paginate());
     }
 
+    protected function shouldIncludeRelation(string $relation): bool
+    {
+        $include = request()->query('include');
+    }
+
     /**
      * Store a newly created reso,,,urce in storage.
      */
