@@ -10,7 +10,7 @@ use App\Models\Event;
 class EventController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resourdddce.
      */
     public function index()
     {
