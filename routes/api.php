@@ -16,3 +16,8 @@ Route::apiResource('events', EventController::class);
 Route::apiResource('events.attendees', AttendeeController::class)
     ->scoped()->except(['update']); // if you would use route model binding to get an attendee, Laravel will automatically load it by looking only for the attendees of a parent event.
     // ->scoped(['attendee' => 'event']);
+
+    // Protected routes
+Route::apiResource('events', EventController::class)
+->only(['store', 'update', 'destroy'])
+->middleware(['auth:sanctum', 'throttle:api']);

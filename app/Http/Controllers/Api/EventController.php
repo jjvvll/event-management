@@ -12,6 +12,10 @@ class EventController extends Controller
 {
     use CanLoadRelationships;
     private $relations = ['user', 'attendees', 'attendees.user'];
+
+    // public function __construct(){
+    //         $this->middleware('auth:sanctum')->except(['index', 'show']);
+    // }
     public function index()
     {
 
@@ -39,7 +43,7 @@ class EventController extends Controller
             'end_time' => 'required|date|after:start_time',
         ]);
 
-        $validatedData['user_id'] = 1;
+        $validatedData['user_id'] = $request->user()->id;
 
         $event = Event::create($validatedData);
 
@@ -71,7 +75,7 @@ class EventController extends Controller
             'end_time' => 'sometimes|date|after:start_time',
         ]);
 
-        $validatedData['user_id'] = 1;
+        $validatedData['user_id'] = $request->user()->id;
 
         $event->update( $validatedData);
 
