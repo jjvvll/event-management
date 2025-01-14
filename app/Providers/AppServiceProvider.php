@@ -27,5 +27,35 @@ class AppServiceProvider extends ServiceProvider
 	            $request->user()?->id ?: $request->ip()
 	          );
         });
+
+        // Gate::define('update-post', function (User $user, Post $post) {
+        //     return $user->id === $post->user_id;
+        // });
+
+        // Gate::define('update-post', [PostPolicy::class, 'update']);
     }
 }
+
+
+// Authorization changes
+// Change 1 (Authorization with Gates lecture and later)
+
+// There's no AuthServiceProvider file anymore in Laravel 11.
+
+// Solution
+
+// The only provider class now is App\Providers\AppServiceProvider - just add the gate definitions inside this file. Source
+
+// Change 2 (Authorization with Policies lecture and later)
+
+// No more $this->authorize('update', $post) inside the controller.
+
+// Solution
+
+// // Add this at the top
+// use Illuminate\Support\Facades\Gate;
+ 
+// // Instead of $this->authorize(...) call Gate::authorize(...)
+// // passing the arguments the same way as before
+// Gate::authorize('update', $post);
+// Source
