@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Attendee;
 use App\Http\Traits\CanLoadRelationships;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 
 class AttendeeController extends Controller
 {
     use CanLoadRelationships;
-    private array $relations = ['user'];
+    use AuthorizesRequests;
+    private array $relations = ['user', 'event.user'];
 
     public function index(Event $event)
     {
@@ -73,9 +76,11 @@ class AttendeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $event, Attendee $attendee)
+    public function destroy(Event $event, Attendee $attendee)
     {
-        $attendee->delete();
+       $this->authorize('delete_attendee', [$event, $attendee]);
+
+       $attendee->delete();
 
         return response(status : 204);
     }

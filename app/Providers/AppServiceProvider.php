@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Event;
+use App\Models\Attendee;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +30,15 @@ class AppServiceProvider extends ServiceProvider
 	            $request->user()?->id ?: $request->ip()
 	          );
         });
+
+        Gate::define('update-event', function($user, Event $event){
+                return $user->id === $event->user_id;
+        });
+
+        Gate::define('delete_attendee', function($user, Event $event, Attendee $attendee){
+                return $user->id === $event->user_id || $user->id === $attendee->user_id ;
+        });
+
 
         // Gate::define('update-post', function (User $user, Post $post) {
         //     return $user->id === $post->user_id;
@@ -54,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
 
 // // Add this at the top
 // use Illuminate\Support\Facades\Gate;
- 
+
 // // Instead of $this->authorize(...) call Gate::authorize(...)
 // // passing the arguments the same way as before
 // Gate::authorize('update', $post);
