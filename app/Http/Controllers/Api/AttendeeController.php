@@ -20,7 +20,7 @@ class AttendeeController extends Controller
 
     public function index(Event $event)
     {
-      //  $attendees = $event->attendees()->latest();
+      //  //$attendees = $event->attendees()->latest();
 
         $attendees = $this->loadRelationships(
             $event->attendees()->latest()
