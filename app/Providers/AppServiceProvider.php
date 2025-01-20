@@ -15,6 +15,14 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+    // protected $policies = [
+    //     //only if you want to override the default laravel behavior
+    // ];
+
+    // protected $policies = [
+    //     Event::class => EventPolicy::class,
+    // ];
+
     public function register(): void
     {
         //

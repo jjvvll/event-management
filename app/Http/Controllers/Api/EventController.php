@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+// use App\Http\Controllers\Controller;
+use \Illuminate\Routing\Controller;
 use App\Http\Resources\EventResource;
 use App\Http\Traits\CanLoadRelationships;
 use Illuminate\Http\Request;
@@ -15,11 +16,16 @@ class EventController extends Controller
     private $relations = ['user', 'attendees', 'attendees.user'];
     use AuthorizesRequests;
 
-    // public function __construct(){
-    //         $this->middleware('auth:sanctum')->except(['index', 'show']);
-    // }
+    public function __construct(){
+
+      $this->authorizeResource(Event::class, 'event');
+        //$this->authorize('viewAny', Event::class);
+    }
+
     public function index()
     {
+
+       // $this->authorize('viewAny', Event::class);
 
         $query =  $this->loadRelationships(Event::query());
 
@@ -72,7 +78,7 @@ class EventController extends Controller
         //     abort(403, 'You are not authorized to update this event.');
         // }
 
-        $this->authorize('update-event', $event);
+        //$this->authorize('update-event', $event);
 
         $validatedData = $request->validate([
             'name' => 'sometimes|string|max:255',

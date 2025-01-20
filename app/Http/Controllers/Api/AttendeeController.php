@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+//use App\Http\Controllers\Controller;
+use \Illuminate\Routing\Controller;
 use App\Http\Resources\AttendeeResource;
 use Illuminate\Http\Request;
 use App\Models\Event;
@@ -17,6 +18,12 @@ class AttendeeController extends Controller
     use CanLoadRelationships;
     use AuthorizesRequests;
     private array $relations = ['user', 'event.user'];
+
+    public function __construct(){
+
+        $this->authorizeResource(Attendee::class, 'attendee');
+          //$this->authorize('viewAny', Event::class);
+      }
 
     public function index(Event $event)
     {
@@ -78,7 +85,7 @@ class AttendeeController extends Controller
      */
     public function destroy(Event $event, Attendee $attendee)
     {
-       $this->authorize('delete_attendee', [$event, $attendee]);
+       //$this->authorize('delete_attendee', [$event, $attendee]);
 
        $attendee->delete();
 
