@@ -36,7 +36,7 @@ trait CanLoadRelationships{
         $relations = array_map('trim', explode(',', $include));
 
         return in_array($relation, $relations);
-        //dd($relations);
+        //dd($relations);;
     }
 
 }
