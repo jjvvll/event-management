@@ -8,4 +8,4 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 
-Schedule::command('  app:send-event-reminder')->everyFiveSeconds();
+Schedule::command('  app:send-event-reminder')->everyFiveSeconds();//
