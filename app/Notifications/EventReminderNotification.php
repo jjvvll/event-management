@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use app\models\Event;
 
-class EventReminderNotification extends Notification
+class EventReminderNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
