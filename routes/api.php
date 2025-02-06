@@ -25,7 +25,7 @@ Route::apiResource('events', EventController::class)
     ->only(['store', 'update', 'destroy'])
     ->middleware(['auth:sanctum', 'throttle:api']);
 
-// Protected routes
+// Protected routes/
 Route::apiResource('events.attendees', AttendeeController::class)
     ->scoped()
     ->only(['store', 'destroy'])
